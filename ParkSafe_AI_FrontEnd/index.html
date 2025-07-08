@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkSafe AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-parking"></i>
+                <span>ParkSafe AI</span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="dashboard-home.html" target="_blank">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ParkSafe AI</h1>
+            <p class="hero-subtitle">AI-powered Smart Parking Violation Detection and Notification System</p>
+            <div class="hero-buttons">
+                <button class="primary-btn" onclick="location.href='#about'">Learn More</button>
+                <button class="secondary-btn" onclick="location.href='login.html'">Get Started</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="stats">
+        <div class="stat-item">
+            <i class="fas fa-camera"></i>
+            <h3>1000+</h3>
+            <p>Cameras Deployed</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-car"></i>
+            <h3>50,000+</h3>
+            <p>Violations Detected</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <h3>24/7</h3>
+            <p>Real-time Monitoring</p>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-percent"></i>
+            <h3>99%</h3>
+            <p>Accuracy Rate</p>
+        </div>
+    </section>
+    
+    <section id="about" class="about">
+        <h2>About ParkSafe AI</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>ParkSafe AI is an innovative parking management system designed to tackle the challenges of urban parking violations. Using advanced computer vision and Optical Character Recognition (OCR) technology, it can detect improperly parked vehicles and instantly notify the management team.</p>
+                <p>By leveraging artificial intelligence, ParkSafe AI provides real-time monitoring, detailed violation reports, and instant alerts, ensuring a smooth and systematic approach to parking management.</p>
+                <div class="about-features">
+                    <div class="about-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure & Reliable</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Fast Processing</span>
+                    </div>
+                    <div class="about-feature">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Smart Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="Background.jpg" alt="ParkSafe AI System Overview">
+            </div>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <h2>Key Features</h2>
+        <div class="feature-list">
+            <div class="feature-row">
+                <div class="feature-item">
+                    <i class="fas fa-video"></i>
+                    <h3>Real-time Monitoring</h3>
+                    <p>24/7 surveillance with instant violation detection</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bell"></i>
+                    <h3>Automated Alerts</h3>
+                    <p>Instant notifications for parking violations</p>
+                </div>
+            </div>
+            <div class="feature-row">
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI-Powered Detection</h3>
+                    <p>Advanced computer vision for accurate detection</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-expand"></i>
+                    <h3>Scalable Solution</h3>
+                    <p>Adaptable to any parking facility size</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"ParkSafe AI has revolutionized our parking management. The system's accuracy and efficiency are unmatched."</p>
+                    <div class="testimonial-author">
+                        <h4>John Smith</h4>
+                        <p>Parking Manager, City Center</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    <p>"The automated alerts have significantly reduced our response time to parking violations."</p>
+                    <div class="testimonial-author">
+                        <h4>Sarah Johnson</h4>
+                        <p>Security Director, Mall Complex</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <details>
+                <summary>How does the AI detect parking violations?</summary>
+                <p>Our system uses advanced computer vision and OCR technology to recognize violations in real-time, analyzing vehicle positions and parking regulations.</p>
+            </details>
+            <details>
+                <summary>What types of violations can the system detect?</summary>
+                <p>The system can detect various violations including double parking, parking in no-parking zones, expired parking permits, and unauthorized parking.</p>
+            </details>
+            <details>
+                <summary>How accurate is the system?</summary>
+                <p>Our AI system boasts a 99% accuracy rate in violation detection, with continuous learning and improvement capabilities.</p>
+            </details>
+            <details>
+                <summary>Can the system be integrated with existing security systems?</summary>
+                <p>Yes, ParkSafe AI is designed to seamlessly integrate with existing security and parking management systems.</p>
+            </details>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>support@parksafeai.com</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>+92 315 5081773 - 335 9765266</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Bahria University, Islamabad</p>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="primary-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ParkSafe AI</h3>
+                <p>Making cities smarter, one parking space at a time.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Created by Muhammad Abdullah & Mamoon Zaheer</p>
+            <p>Final Year Project - Bahria University</p>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>

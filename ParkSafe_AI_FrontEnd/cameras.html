@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cameras - ParkSafe AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h1>Cameras</h1>
+        <div class="header-right">
+            <div class="datetime-container">
+                <div id="datetime"></div>
+            </div>
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user"></i>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Menu</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard-home.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cameras.html" class="active">
+                        <i class="fas fa-camera"></i>
+                        <span>Cameras</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="uploads.html">
+                        <i class="fas fa-upload"></i>
+                        <span>Uploads</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="camera-grid">
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <span class="camera-name">Camera 1 - Main Entrance</span>
+                        <div class="camera-controls">
+                            <span class="camera-status active">Active</span>
+                            <button class="full-view-btn" onclick="toggleFullView(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="feed-container">
+                        <div class="timestamp">LIVE - 12:30:45 PM</div>
+                        <div class="feed-placeholder">
+                            <i class="fas fa-video"></i>
+                            <span>Live Feed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <span class="camera-name">Camera 2 - Parking Lot A</span>
+                        <div class="camera-controls">
+                            <span class="camera-status active">Active</span>
+                            <button class="full-view-btn" onclick="toggleFullView(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="feed-container">
+                        <div class="timestamp">LIVE - 12:30:45 PM</div>
+                        <div class="feed-placeholder">
+                            <i class="fas fa-video"></i>
+                            <span>Live Feed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <span class="camera-name">Camera 3 - Parking Lot B</span>
+                        <div class="camera-controls">
+                            <span class="camera-status active">Active</span>
+                            <button class="full-view-btn" onclick="toggleFullView(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="feed-container">
+                        <div class="timestamp">LIVE - 12:30:45 PM</div>
+                        <div class="feed-placeholder">
+                            <i class="fas fa-video"></i>
+                            <span>Live Feed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <span class="camera-name">Camera 4 - Exit Gate</span>
+                        <div class="camera-controls">
+                            <span class="camera-status active">Active</span>
+                            <button class="full-view-btn" onclick="toggleFullView(this)">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="feed-container">
+                        <div class="timestamp">LIVE - 12:30:45 PM</div>
+                        <div class="feed-placeholder">
+                            <i class="fas fa-video"></i>
+                            <span>Live Feed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            document.getElementById('datetime').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        // Update time immediately and then every second
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Menu toggle functionality
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.main-content').classList.toggle('active');
+        });
+
+        // User dropdown functionality
+        const userIcon = document.getElementById('userIcon');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userIcon.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        function toggleFullView(button) {
+            const cameraFeed = button.closest('.camera-feed');
+            const isFullView = cameraFeed.classList.toggle('full-view');
+            
+            // Update icon
+            const icon = button.querySelector('i');
+            icon.className = isFullView ? 'fas fa-compress' : 'fas fa-expand';
+            
+            // Update other cameras visibility
+            const allCameras = document.querySelectorAll('.camera-feed');
+            allCameras.forEach(cam => {
+                if (cam !== cameraFeed) {
+                    cam.style.display = isFullView ? 'none' : 'block';
+                }
+            });
+        }
+
+        // Close full view when clicking outside
+        document.addEventListener('click', function(e) {
+            const fullViewCamera = document.querySelector('.camera-feed.full-view');
+            if (fullViewCamera && !fullViewCamera.contains(e.target)) {
+                const button = fullViewCamera.querySelector('.full-view-btn');
+                toggleFullView(button);
+            }
+        });
+    </script>
+</body>
+</html> 

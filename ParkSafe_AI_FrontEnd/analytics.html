@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - ParkSafe AI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <h1>Analytics</h1>
+        <div class="header-right">
+            <div class="datetime-container">
+                <div id="datetime"></div>
+            </div>
+            <div class="user-icon" id="userIcon">
+                <i class="fas fa-user"></i>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fas fa-user"></i> Profile</a>
+                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Menu</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="dashboard-home.html">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="analytics.html" class="active">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="cameras.html">
+                        <i class="fas fa-camera"></i>
+                        <span>Cameras</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="uploads.html">
+                        <i class="fas fa-upload"></i>
+                        <span>Uploads</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="analytics-header">
+                <div class="date-filter">
+                    <button class="filter-btn active" data-period="day">Day</button>
+                    <button class="filter-btn" data-period="week">Week</button>
+                    <button class="filter-btn" data-period="month">Month</button>
+                    <button class="filter-btn" data-period="year">Year</button>
+                    <div class="custom-date">
+                        <input type="date" id="startDate">
+                        <span>to</span>
+                        <input type="date" id="endDate">
+                        <button class="apply-btn">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Violations</h3>
+                        <div class="stat-value" id="totalViolations">0</div>
+                        <div class="stat-change" id="violationChange">
+                            <i class="fas fa-minus"></i> No Change
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Cars</h3>
+                        <div class="stat-value" id="totalCars">0</div>
+                        <div class="stat-change" id="carChange">
+                            <i class="fas fa-minus"></i> No Change
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Correctly Parked</h3>
+                        <div class="stat-value" id="totalCorrect">0</div>
+                        <div class="stat-change" id="correctChange">
+                            <i class="fas fa-minus"></i> No Change
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Last Update</h3>
+                        <div class="stat-value" id="lastUpdate">-</div>
+                        <div class="stat-change">
+                            <i class="fas fa-sync"></i> Auto-refresh
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="car-logs">
+                <div class="logs-header">
+                    <h3>Car Logs</h3>
+                    <div class="export-options">
+                        <button class="export-btn" onclick="exportData('pdf')">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </button>
+                        <button class="export-btn" onclick="exportData('csv')">
+                            <i class="fas fa-file-csv"></i> Export CSV
+                        </button>
+                    </div>
+                </div>
+                <div class="logs-content">
+                    <table class="car-logs-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Frame</th>
+                                <th>Car ID</th>
+                                <th>License Plate</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recordsTable">
+                            <!-- Data will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="dashboard.js"></script>
+    <script>
+        // DateTime update
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+            document.getElementById('datetime').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        // Menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('active');
+            document.querySelector('.main-content').classList.toggle('active');
+        });
+
+        // User dropdown
+        const userIcon = document.getElementById('userIcon');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userIcon.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!userIcon.contains(e.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        // Date filter functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                updateData(btn.dataset.period);
+            });
+        });
+
+        function updateData(period) {
+            // Update data based on selected period
+            console.log('Updating data for period:', period);
+        }
+
+        // Function to fetch and update records
+        async function fetchRecords() {
+            try {
+                const response = await fetch('http://localhost:8000/records/');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const records = await response.json();
+                
+                // Update statistics
+                const totalViolations = records.filter(r => r.violation_status === 'Violation').length;
+                const totalCorrect = records.filter(r => r.violation_status === 'Correctly Parked').length;
+                
+                document.getElementById('totalViolations').textContent = totalViolations;
+                document.getElementById('totalCars').textContent = records.length;
+                document.getElementById('totalCorrect').textContent = totalCorrect;
+                document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+                
+                // Update table
+                const tableBody = document.getElementById('recordsTable');
+                tableBody.innerHTML = '';
+                
+                if (records.length === 0) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = '<td colspan="7" class="text-center">No records found</td>';
+                    tableBody.appendChild(row);
+                    return;
+                }
+                
+                records.forEach(record => {
+                    const row = document.createElement('tr');
+                    const timestamp = new Date(record.timestamp).toLocaleString();
+                    
+                    row.innerHTML = `
+                        <td>${timestamp}</td>
+                        <td>${record.frame_nmr}</td>
+                        <td>${record.car_id}</td>
+                        <td>${record.license_number}</td>
+                        <td>${record.license_number_score.toFixed(2)}</td>
+                        <td>
+                            <span class="status-badge ${record.violation_status === 'Violation' ? 'violation' : 'no-violation'}">
+                                ${record.violation_status}
+                            </span>
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn" title="View Details" onclick="viewDetails(${record.frame_nmr})">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn" title="Download Image" onclick="downloadImage(${record.frame_nmr})">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    `;
+                    
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching records:', error);
+                const tableBody = document.getElementById('recordsTable');
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center text-danger">
+                            Error connecting to backend server. Please make sure the backend is running at http://localhost:8000
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Function to view details (placeholder)
+        function viewDetails(frameNmr) {
+            alert(`Viewing details for frame ${frameNmr}`);
+            // Implement detailed view functionality
+        }
+
+        // Function to download image (placeholder)
+        function downloadImage(frameNmr) {
+            alert(`Downloading image for frame ${frameNmr}`);
+            // Implement image download functionality
+        }
+
+        // Function to export data
+        function exportData(format) {
+            alert(`Exporting data in ${format.toUpperCase()} format`);
+            // Implement export functionality
+        }
+
+        // Fetch records initially and every 5 seconds
+        fetchRecords();
+        setInterval(fetchRecords, 5000);
+    </script>
+</body>
+</html> 
